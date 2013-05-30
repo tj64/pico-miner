@@ -1,0 +1,82 @@
+| associat                 | weka.associations                                     |
+| associatgsp              | weka.associations.gsp                                 |
+| associattert             | weka.associations.tertius                             |
+| attrselect               | weka.attributeSelection                               |
+| cls                      | weka.classifiers                                      |
+| clsbay                   | weka.classifiers.bayes                                |
+| clsbayblr                | weka.classifiers.bayes.blr                            |
+| clsbaynet                | weka.classifiers.bayes.net                            |
+| clsbaynetest             | weka.classifiers.bayes.net.estimate                   |
+| clsbaynetsearch          | weka.classifiers.bayes.net.search                     |
+| clsbaynetsearchci        | weka.classifiers.bayes.net.search.ci                  |
+| clsbaynetsearchfix       | weka.classifiers.bayes.net.search.fixed               |
+| clsbaynetsearchglob      | weka.classifiers.bayes.net.search.global              |
+| clsbaynetsearchloc       | weka.classifiers.bayes.net.search.local               |
+| clseval                  | weka.classifiers.evaluation                           |
+| clsfunc                  | weka.classifiers.functions                            |
+| clsfuncneural            | weka.classifiers.functions.neural                     |
+| clsfuncpace              | weka.classifiers.functions.pace                       |
+| clsfuncsuppvec           | weka.classifiers.functions.supportVector              |
+| clslazy                  | weka.classifiers.lazy                                 |
+| clslazykstar             | weka.classifiers.lazy.kstar                           |
+| clsmeta                  | weka.classifiers.meta                                 |
+| clsmetanesteddicho       | weka.classifiers.meta.nestedDichotomies               |
+| clsmi                    | weka.classifiers.mi                                   |
+| clsmisuppvec             | weka.classifiers.mi.supportVector                     |
+| clsmisc                  | weka.classifiers.misc                                 |
+| clspmmlcons              | weka.classifiers.pmml.consumer                        |
+| clsrules                 | weka.classifiers.rules                                |
+| clsrulespart             | weka.classifiers.rules.part                           |
+| clstrees                 | weka.classifiers.trees                                |
+| clstreesadtree           | weka.classifiers.trees.adtree                         |
+| clstreesft               | weka.classifiers.trees.ft                             |
+| clstreesj48              | weka.classifiers.trees.j48                            |
+| clstreeslmt              | weka.classifiers.trees.lmt                            |
+| clstreesm5               | weka.classifiers.trees.m5                             |
+| clsxml                   | weka.classifiers.xml                                  |
+| clust                    | weka.clusterers                                       |
+| clustOPTdb               | weka.clusterers.forOPTICSAndDBScan.Databases          |
+| clustOPTdataobj          | weka.clusterers.forOPTICSAndDBScan.DataObjects        |
+|                          | weka.clusterers.forOPTICSAndDBScan.OPTICS_GUI         |
+| clustOPTutils            | weka.clusterers.forOPTICSAndDBScan.Utils              |
+| core                     | weka.core                                             |
+| coreconv                 | weka.core.converters                                  |
+| corelogg                 | weka.core.logging                                     |
+| coremathexpr             | weka.core.mathematicalexpression                      |
+| corematrix               | weka.core.matrix                                      |
+| corenbsearch             | weka.core.neighboursearch                             |
+| corenbsearchballtrees    | weka.core.neighboursearch.balltrees                   |
+| corenbsearchcovertrees   | weka.core.neighboursearch.covertrees                  |
+| corenbsearchkdtrees      | weka.core.neighboursearch.kdtrees                     |
+| corepmml                 | weka.core.pmml                                        |
+| corestemmers             | weka.core.stemmers                                    |
+| coretoken                | weka.core.tokenizers                                  |
+| corexml                  | weka.core.xml                                         |
+| datagen                  | weka.datagenerators                                   |
+| datagenclassclass        | weka.datagenerators.classifiers.classification        |
+| datagenclassregr         | weka.datagenerators.classifiers.regression            |
+| datagenclust             | weka.datagenerators.clusterers                        |
+| estim                    | weka.estimators                                       |
+| experiment               | weka.experiment                                       |
+| experimentxml            | weka.experiment.xml                                   |
+| filters                  | weka.filters                                          |
+| filterssuperattr         | weka.filters.supervised.attribute                     |
+| filterssuperinst         | weka.filters.supervised.instance                      |
+| filtersunsuperattr       | weka.filters.unsupervised.attribute                   |
+| filtersunsuperinst       | weka.filters.unsupervised.instance                    |
+| filtersunsuperinstsubset | weka.filters.unsupervised.instance.subsetbyexpression |
+|                          | weka.gui                                              |
+|                          | weka.gui.arffviewer                                   |
+|                          | weka.gui.beans                                        |
+|                          | weka.gui.beans.xml                                    |
+|                          | weka.gui.boundaryvisualizer                           |
+|                          | weka.gui.experiment                                   |
+|                          | weka.gui.explorer                                     |
+|                          | weka.gui.graphvisualizer                              |
+|                          | weka.gui.hierarchyvisualizer                          |
+|                          | weka.gui.sql                                          |
+|                          | weka.gui.sql.event                                    |
+|                          | weka.gui.streams                                      |
+|                          | weka.gui.treevisualizer                               |
+|                          | weka.gui.visualize                                    |
+|                          | weka.gui.visualize.plugins                            |

@@ -1,0 +1,9 @@
+# startpoint: <file>.c or <file>.cpp and <file>.h
+# create <file>.i from <file>.h, then call
+swig -cffi -c++ <file>.i
+g++ -c <file>_wrap.cxx -fpic -o <file>_wrap.o
+# g++ -c <file>.cpp -fpic -o <file>.o
+g++ -c <file>.c -fpic -o <file>.o
+g++ -shared <file>.o <file>_wrap.o -o <file>.so
+
+

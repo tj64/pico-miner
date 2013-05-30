@@ -1,0 +1,5 @@
+swig -cffi -c++ swigexample.i
+g++ -c swigexample_wrap.cxx -fpic -o swigexample_wrap.o
+# g++ -c swigexample.cpp -fpic -o swigexample.o
+g++ -c swigexample.c -fpic -o swigexample.o
+g++ -shared swigexample.o swigexample_wrap.o -o swigexample.so
