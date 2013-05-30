@@ -213,10 +213,10 @@ To be used with the `format' function and `weka-package-mappings'.")
              (user-login-name)))
     (insert weka-preamble)
     (mapc
-     (lambda (fun)
+     (lambda (pkg)
        (insert
         (format weka-glue-function-template
-                (car fun) (cdr fun))))
+                (car pkg) (cdr pkg))))
      weka-package-mappings)))
 
 ;; ** Commands
