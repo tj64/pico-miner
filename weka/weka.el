@@ -204,7 +204,7 @@ To be used with the `format' function and `weka-package-mappings'.")
      ((file-exists-p out)
       (if (y-or-n-p (format "Overwrite existing file %s" out))
           (find-file out)
-        (error "Out-file already exists"!)))
+        (error "Out-file already exists!")))
      (t (find-file out)))
     (erase-buffer)
     (insert
