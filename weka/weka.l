@@ -32,7 +32,7 @@
                              (mapcar
                                 '((X) (setq PkgName (pack PkgName X "/")))
                                 (car (split (head -1 Lst) ".")) ) )
-                          (let WordLst
+                          (let ClsNameAsLst
                                 (mapcar
                                    pack
                                    (head -1 (split (chop (last Lst)) ".")) )
@@ -41,8 +41,8 @@
                                       (list
                                          (mapcar
                                             '((Word) (pack Word "."))
-                                            (head -1 WordLst) )
-                                         (last WordLst) ) ) ) ) ) ) ) ) ) ) ) )
+                                            (head -1 ClsNameAsLst) )
+                                         (last ClsNameAsLst) ) ) ) ) ) ) ) ) ) ) ) )
 
 
 ##                        (setq Cls "Weka Classes")
