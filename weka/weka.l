@@ -16,33 +16,41 @@
   (unless (info PICOMINER)
      (call 'mkdir "-p" PICOMINER) )
   (out CLASSES
-     (in (list "wget" "--no-http-keep-alive" "--no-check-certificate"
-             "-O" "-" "-o" "/dev/null" WEKAURL)
-        (while 
-           (from
-              "HREF=\"weka/")
-                 (let
-                    (Lst (mapcar pack (split (chop (till "\"")) "/" ))
-                     PkgName "weka/")
+     (prog
+        # open enclosing list
+        (prin "(")
+        (in (list "wget" "--no-http-keep-alive" "--no-check-certificate"
+               "-O" "-" "-o" "/dev/null" WEKAURL )
+           (while
+              (from
+                 # get all WEKA classes
+                 "HREF=\"weka/" )
+              (let
+                 (Lst (mapcar pack (split (chop (till "\"")) "/" ))
+                  PkgName "weka/" )
                  (unless
+                    # exclude GUI classes
                     (= (car  Lst) "gui")
                     (print
                        (cons
+                          # extract package name
                           (last
                              (mapcar
                                 '((X) (setq PkgName (pack PkgName X "/")))
                                 (car (split (head -1 Lst) ".")) ) )
+                          # extract class name
                           (let ClsNameAsLst
-                                (mapcar
-                                   pack
-                                   (head -1 (split (chop (last Lst)) ".")) )
-                                (pack
-                                   (chop
-                                      (list
-                                         (mapcar
-                                            '((Word) (pack Word "."))
-                                            (head -1 ClsNameAsLst) )
-                                         (last ClsNameAsLst) ) ) ) ) ) ) ) ) ) ) ) )
+                             (mapcar pack
+                                (head -1 (split (chop (last Lst)) ".")) )
+                             (pack
+                                (chop
+                                   (list
+                                      (mapcar
+                                         '((Word) (pack Word "."))
+                                         (head -1 ClsNameAsLst) )
+                                      (last ClsNameAsLst) ) ) ) ) ) ) ) ) ) )
+        # close enclosing list
+        (prin ")") ) ) )
 
 
 ##                        (setq Cls "Weka Classes")
