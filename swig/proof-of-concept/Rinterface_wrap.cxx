@@ -168,57 +168,195 @@ template <typename T> T SwigValueInit() {
 #include <string.h>
 #include <stdlib.h>
 
+                                                                                             
+/* Includes the header in the wrapper code */                                                  
+/* #include "Rinterface.h"         */
+#include "/usr/include/R/Rinterface.h"                                                                                                                                                
 
- /* Put header files here or function declarations like below */
- extern double My_variable;
- extern int fact(int n);
- extern int my_mod(int x, int y);
- extern char *get_time();
- 
-EXPORT int _wrap_fact (int larg1) {
-  int lresult = (int)0 ;
-  int arg1 ;
-  int result;
-  
-  arg1 = larg1;
+EXPORT void _wrap_R_RestoreGlobalEnv () {
   try {
-    result = (int)fact(arg1);
-    lresult = result;
-    return lresult;
+    R_RestoreGlobalEnv();
+    
   } catch (...) {
-    return (int)0;
+    
   }
 }
 
 
-EXPORT int _wrap_my_mod (int larg1, int larg2) {
-  int lresult = (int)0 ;
-  int arg1 ;
-  int arg2 ;
-  int result;
+EXPORT void _wrap_R_RestoreGlobalEnvFromFile (char *larg1, Rboolean *larg2) {
+  char *arg1 = (char *) 0 ;
+  Rboolean arg2 ;
   
   arg1 = larg1;
-  arg2 = larg2;
+  arg2 = *larg2;
   try {
-    result = (int)my_mod(arg1,arg2);
-    lresult = result;
-    return lresult;
+    R_RestoreGlobalEnvFromFile((char const *)arg1,arg2);
+    
   } catch (...) {
-    return (int)0;
+    
   }
 }
 
 
-EXPORT char *_wrap_get_time () {
+EXPORT void _wrap_R_SaveGlobalEnv () {
+  try {
+    R_SaveGlobalEnv();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_R_SaveGlobalEnvToFile (char *larg1) {
+  char *arg1 = (char *) 0 ;
+  
+  arg1 = larg1;
+  try {
+    R_SaveGlobalEnvToFile((char const *)arg1);
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_R_FlushConsole () {
+  try {
+    R_FlushConsole();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_R_ClearerrConsole () {
+  try {
+    R_ClearerrConsole();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_R_Suicide (char *larg1) {
+  char *arg1 = (char *) 0 ;
+  
+  arg1 = larg1;
+  try {
+    R_Suicide((char const *)arg1);
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT char *_wrap_R_HomeDir () {
   char * lresult = (char *)0 ;
   char *result = 0 ;
   
   try {
-    result = (char *)get_time();
+    result = (char *)R_HomeDir();
     lresult = result;
     return lresult;
   } catch (...) {
     return (char *)0;
+  }
+}
+
+
+EXPORT void _wrap_R_setupHistory () {
+  try {
+    R_setupHistory();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_Rf_jump_to_toplevel () {
+  try {
+    Rf_jump_to_toplevel();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_Rf_mainloop () {
+  try {
+    Rf_mainloop();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_Rf_onintr () {
+  try {
+    Rf_onintr();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_process_site_Renviron () {
+  try {
+    process_site_Renviron();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_process_system_Renviron () {
+  try {
+    process_system_Renviron();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_process_user_Renviron () {
+  try {
+    process_user_Renviron();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_R_setStartTime () {
+  try {
+    R_setStartTime();
+    
+  } catch (...) {
+    
+  }
+}
+
+
+EXPORT void _wrap_fpu_setup (Rboolean *larg1) {
+  Rboolean arg1 ;
+  
+  arg1 = *larg1;
+  try {
+    fpu_setup(arg1);
+    
+  } catch (...) {
+    
   }
 }
 

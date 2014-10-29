@@ -52,7 +52,6 @@
                                        (head -1 (split (chop (last Lst)) ".")) )
                                     (pack
                                        (chop
-
                                           (list
                                              (mapcar
                                                 '((Word) (pack Word "."))
@@ -72,12 +71,28 @@
 
 # (show '*Weka)
 
-## # run WEKA 
-## (de run ()
-##    (out
-##       (prin
-##          "This is a test for wk\n"
-##          "WekaHome is: " WEKAHOME "\n"
-##          "ClassPath is: " CLASSPATH "\n"
-##          # "DataDir is: " DATADIR
-##  ) ) )
+(de run (Cls Out Flag Data . @)
+   (let (ChopData (chop Data)
+         NormData (if (= "/" (car ChopData))
+                     (pack (cdr ChopData))
+                     Data ) )
+      (out Out
+         (in (filter bool
+                (list 'java
+                   "-cp"
+                   CLASSPATH
+                   (pack weka.associations Cls)
+                   Flag
+                   (pack DATADIR "/" NormData)
+                   (while (args) (printsp (next))) ) )
+            (while (char) (prin @)) ) ) ) )
+
+
+(de run ()
+   (out
+      (prin
+         "This is a test for wk\n"
+         "WekaHome is: " WEKAHOME "\n"
+         "ClassPath is: " CLASSPATH "\n"
+         # "DataDir is: " DATADIR
+ ) ) )

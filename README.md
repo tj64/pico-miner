@@ -1,4 +1,4 @@
 pico-miner
 ==========
 
-FFI's from PicoLisp to various Data Mining Libraries
+PicoLisp wrappers to various Data Mining Libraries

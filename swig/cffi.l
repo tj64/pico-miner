@@ -19,20 +19,21 @@
 ## #  swig -cffi -c++ myfile.i
 ## # #+end_src
 
-## calls on SWIG interface files (extended C or C++ header files with extension
-## =.i=). The task can be splitted into  the following subtasks:
+## calls on SWIG interface files (extended C or C++ header files with
+## extension =.i=). The task can be splitted into the following
+## subtasks:
 
-##  1. copy all the =(cffi:defcfun ...)= definitions to a temporary file
-##  2. flatten the temporary file (extension =.flat=)
-##  3. transform the =(cffi:defcfun ...)= definitions into PicoLisp wrapper
-##     functions
-##  4. save the temporary file as PicoLisp library (extension =.l=)
+##  1. copy all the =(cffi:defcfun ...)= definitions to a temporary
+##  file 2. flatten the temporary file (extension =.flat=)
+##  3. transform the =(cffi:defcfun ...)= definitions into PicoLisp
+##  wrapper functions 4. save the temporary file as PicoLisp library
+##  (extension =.l=)
 
 ## ** Hint
 
-## This source file is structured 'the outshine way'. Thus, as an Emacs user,
-## when you activate =outline-minor-mode= with =outshine= extensions, you get
-## the following functionality:
+## This source file is structured 'the outshine way'. Thus, as an
+## Emacs user, when you activate =outline-minor-mode= with =outshine=
+## extensions, you get the following functionality:
 
 ##  - outline navigation and structure editing
 ##  - headline fontification
@@ -40,10 +41,11 @@
 ##  - Org-mode property commands and API for easy property-editing
 ##  - superfast navigation and buffer remote-control (via =navi-mode=)
 
-## See [[http://orgmode.org/worg/org-tutorials/org-outside-org.html][Org-mode
+## See
+## [[http://orgmode.org/worg/org-tutorials/org-outside-org.html][Org-mode
 ## outside Org-mode]] for more information, and this
-## [[http://www.youtube.com/watch?v=MYJvQ-5dvK8][screencast]] on Youtube as a
-## demonstration of the concept.
+## [[http://www.youtube.com/watch?v=MYJvQ-5dvK8][screencast]] on
+## Youtube as a demonstration of the concept.
 
 ## * Namespace
 
