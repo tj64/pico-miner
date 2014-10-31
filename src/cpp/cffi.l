@@ -61,21 +61,22 @@
 
 ## * Helper Functions
 
+## keyword to sym
 (de kw2sym (Kw) (pack (cadr (split (chop Kw) ":"))))
 
-## (de call-swig-in-tmp-dir (Header-file)
-##    )
-
-## ## get all relevant type mappings
-## (de join-type-mappings Libs
-##    (cons type-mappings Libs))
-
-## (de map-types
-##    '(((char) . B)
-##      ((int) . I)
-##      ((long) . N)
-##      ((char) . C)
-##      (() . C))
+## call SWIG CFFI on C/C++ header file in tmp dir
+(de swig (HeaderFile)
+   (if (info HeaderFile)
+      (let (bname (basename HeaderFile)
+            basename-sans-extension
+            (pack (car (split (chop bname) ".")))
+            tmpdir
+            (dirname (tmp (pack basename-sans-extension ".l"))) )
+         (call 'cp HeaderFile tmpdir)
+         (call 'swig "-cffi" "-c++"
+            (pack tmpdir bname) )
+         (pack tmpdir basename-sans-extension ".lisp"))
+      (msg HeaderFile " does not exist") ) )
 
 ##  flatten a lisp file
 (de flatten (Infile)
@@ -84,10 +85,15 @@
          (while (read) (println @)) ) ) )
 
 ## * Core Functions
+
+## USAGE:
+## : (cffi~get-signature (cffi~parse-swig (cffi~swig F)))
+## -> ((var My_variable :double) (fun fact :int (n :int)) (fun my_mod :int (x :int) (y :int)) (fun get_time :string))
+
 ## ** Parser
 
-## Parse C/C++ header files and return an alist of signatures
-(de parse-swig-cffi (Infile)
+## parse SWIG CFFI (.lisp) file and return an alist of signatures
+(de parse-swig (Infile)
    (str (and (in Infile (and (from *SWIG_DELIM) (till EOF T))))))
 
 ## ** Convert and Wrap
@@ -95,7 +101,7 @@
 ## (cffi:defcfun ("_wrap_my_mod" my_mod) :int
 ##   (x :int)
 ##   (y :int))
-(de def2lst (Ptree)
+(de get-signature (Ptree)
    (when (lst? Ptree)
       (mapcar
          '((Lst)
@@ -107,6 +113,10 @@
                  (pop 'Lst)
                  Lst ) ) )
          Ptree ) ) )
+
+(de build-native (Signature))
+
+(de wrap-in-fun (Native))
 
 ## (de wrap-in-fun)
 
@@ -133,5 +143,15 @@
    ##          ("<title>"
    ##             (setq *Title (ht:Pack (till "<"))) ) ) ) )
 
+## ## get all relevant type mappings
+## (de join-type-mappings Libs
+##    (cons type-mappings Libs))
+
+## (de map-types
+##    '(((char) . B)
+##      ((int) . I)
+##      ((long) . N)
+##      ((char) . C)
+##      (() . C))
 
 ## cffi.l ends here
