@@ -45,17 +45,19 @@
 
 ## ** General Type Mappings
 
-## (de *Btypes . '(char))
-## (de *Itypes . '(int))
-## (de *Ntypes . '(long))
-## (de *Ctypes . '(char))
-## (de *Stypes . '(char))
-## (de *NUMtypes . '(char))
-## (de *LSTtypes . '(struct))
+(de *Btypes .  '(:char))
+(de *Itypes . '(:int))
+(de *Ntypes . '(:long))
+(de *Ctypes . '(:char))
+(de *Stypes . '(:char))
+(de *NUMtypes . '(:char))
+(de *LSTtypes . '(:struct))
 
 ## ** SWIG output-file delimiter
 
 (de *SWIG_DELIM . ";;;SWIG wrapper code ends here")
+(de *SWIG_FUN . 'cffi:defcfun)
+(de *SWIG_VAR . 'cffi:defcvar)
 
 ## ** Library Specific Type Mappings
 
@@ -70,12 +72,11 @@
       (let (bname (basename HeaderFile)
             basename-sans-extension
             (pack (car (split (chop bname) ".")))
-            tmpdir
-            (dirname (tmp (pack basename-sans-extension ".l"))) )
+            tmpdir (tmp "swig") )
+         ## (call 'mkdir tmpdir)
          (call 'cp HeaderFile tmpdir)
-         (call 'swig "-cffi" "-c++"
-            (pack tmpdir bname) )
-         (pack tmpdir basename-sans-extension ".lisp"))
+         (call 'swig "-cffi" "-c++" (pack tmpdir bname) )
+         (pack tmpdir basename-sans-extension ".lisp") )
       (msg HeaderFile " does not exist") ) )
 
 ##  flatten a lisp file
@@ -87,10 +88,10 @@
 ## * Core Functions
 
 ## USAGE:
-## : (cffi~get-signature (cffi~parse-swig (cffi~swig F)))
+## : (cffi~get-signatures (cffi~parse-swig (cffi~swig F)))
 ## -> ((var My_variable :double) (fun fact :int (n :int)) (fun my_mod :int (x :int) (y :int)) (fun get_time :string))
 
-## ** Parser
+## ** Parse
 
 ## parse SWIG CFFI (.lisp) file and return an alist of signatures
 (de parse-swig (Infile)
@@ -98,25 +99,52 @@
 
 ## ** Convert and Wrap
 
-## (cffi:defcfun ("_wrap_my_mod" my_mod) :int
-##   (x :int)
-##   (y :int))
-(de get-signature (Ptree)
-   (when (lst? Ptree)
-      (mapcar
-         '((Lst)
-           (when (lst? Lst)
-              (cons
-                 (intern
-                    (pack (last (split (chop (pop 'Lst)) "c"))) )
-                 (cadr (pop 'Lst))
-                 (pop 'Lst)
-                 Lst ) ) )
-         Ptree ) ) )
+## Convert a definition like
+## : (cffi:defcfun ("_wrap_my_mod" my_mod) :int
+## :   (x :int)
+## :   (y :int))
+## into signature for 'native'
+(de convert-definition (Def)
+   (let (Nm (cadr (pop 'Def))
+         RetSpec (prog
+                    (case (pop 'Def)
+                       (`*Btypes ''B)
+                       (`*Itypes ''I)
+                       (`*Ntypes ''N)
+                       (`*Ctypes ''C)
+                       (`*Stypes ''S)
+                       (`*NUMtypes ())
+                       (`*LSTtypes ())
+                       (T (msg "Unknown type")) ) )
+         Args (mapcar
+                 '((Arg)
+                   (let (Nm (car Arg)
+                         Typ (cadr Arg) 
+                         ChopNm (chop Nm)
+                         ArgNm (pack
+                                  (uppc (car ChopNm))
+                                  (cdr ChopNm) Typ ) )
+                      (list
+                         ArgNm
+                         (case Typ
+                            (`*Btypes ''B)
+                            (`*Itypes ''I)
+                            (`*Ntypes ''N)
+                            (`*Ctypes ''C)
+                            (`*Stypes ''S)
+                            (`*NUMtypes ())
+                            (`*LSTtypes ())
+                            (T (msg "Unknown type")) ) ) ) )
+                 Def ) )
+      (list Nm RetSpec Args) ) )
 
-(de build-native (Signature))
+## Wrap signature in glue code with 'native' call
+(de wrap-in-fun (Sig Lib)
+   (list
+      'de (car Sig) (mapcar 'pop (cddr Sig))
+      (list 'native Lib (cadr Sig) (cddr Sig) ) ) )
 
-(de wrap-in-fun (Native))
+(de map-defs (Ptree))
 
 ## (de wrap-in-fun)
 
@@ -153,5 +181,19 @@
 ##      ((long) . N)
 ##      ((char) . C)
 ##      (() . C))
+
+## (de get-signatures (Ptree)
+##    (when (lst? Ptree)
+##       (mapcar
+##          '((Lst)
+##            (when (lst? Lst)
+##               (cons
+##                  (intern
+##                     (pack (last (split (chop (pop 'Lst)) "c"))) )
+##                  (cadr (pop 'Lst))
+##                  (pop 'Lst)
+##                  Lst ) ) )
+##          Ptree ) ) )
+
 
 ## cffi.l ends here
